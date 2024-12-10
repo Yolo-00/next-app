@@ -2,5 +2,6 @@
     "layout": {
         "title": "我的 Next.js 应用"
     },
-    "home": "首页"
+    "home": "首页",
+    "my": "我的"
 }
