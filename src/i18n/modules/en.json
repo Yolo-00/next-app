@@ -3,5 +3,8 @@
         "title": "My NextJS application"
     },
     "home": "home",
-    "my": "my"
+    "my": "my",
+    "myData": {
+        "title": "hello my page"
+    }
 }
