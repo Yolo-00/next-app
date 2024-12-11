@@ -2,6 +2,11 @@
     "layout": {
         "title": "我的 Next.js 应用"
     },
+    "theme": {
+        "light": "明亮",
+        "dark": "黑暗",
+        "system": "跟随系统"
+    },
     "home": "首页",
     "my": "我的",
     "myPage": {

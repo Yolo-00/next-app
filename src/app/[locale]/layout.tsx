@@ -56,7 +56,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system">
           <NextIntlClientProvider messages={messages}>
             {children}
           </NextIntlClientProvider>

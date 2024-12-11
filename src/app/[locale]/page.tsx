@@ -4,6 +4,14 @@ import { Link } from "@/i18n/routing";
 import { useLanguage } from "@/hooks";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 export default function Home() {
   const t = useTranslations();
   const locale = useLocale();
@@ -11,10 +19,10 @@ export default function Home() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const onSelectChange = (e: any) => {
-    changeLanguage(e.target.value);
+    changeLanguage(e);
   };
   const onSelectThemeChange = (e: any) => {
-    setTheme(e.target.value);
+    setTheme(e);
   };
   useEffect(() => {
     setMounted(true);
@@ -27,22 +35,35 @@ export default function Home() {
     <div className="flex items-center justify-center">
       <div>
         <h1>{t("home")}</h1>
-        <div>
+        <Button>
+          <Link href="/my" className="hover:text-blue-500 dark:text-yellow-500">
+            {t("my")}
+          </Link>
+        </Button>
+        <div className="flex">
           切换语言：
-          <select defaultValue={locale} onChange={onSelectChange}>
-            <option value="en">en</option>
-            <option value="zh">zh</option>
-          </select>
+          <Select defaultValue={locale} onValueChange={onSelectChange}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="locale" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="en">English</SelectItem>
+              <SelectItem value="zh">简体中文</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <Link href="/my" className="hover:text-blue-500 dark:text-yellow-500">
-          {t("my")}
-        </Link>
-        <div>
+        <div className="flex mt-5">
           切换主题：
-          <select defaultValue={theme} onChange={onSelectThemeChange}>
-            <option value="light">light</option>
-            <option value="dark">dark</option>
-          </select>
+          <Select defaultValue={theme} onValueChange={onSelectThemeChange}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">{t("theme.light")}</SelectItem>
+              <SelectItem value="dark">{t("theme.dark")}</SelectItem>
+              <SelectItem value="system">{t("theme.system")}</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </div>
