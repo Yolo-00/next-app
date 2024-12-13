@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import dayjs from "dayjs";
 export default function Home() {
   const t = useTranslations();
   const locale = useLocale();
@@ -25,9 +26,10 @@ export default function Home() {
     setTheme(e);
   };
   useEffect(() => {
+    console.log(dayjs(new Date().toISOString()).format("YYYY-MM-DD HH:mm:ss"));
+    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
     setMounted(true);
   }, []);
-
   if (!mounted) {
     return null;
   }

@@ -7,6 +7,18 @@
         "dark": "dark",
         "system": "system"
     },
+    "login": {
+        "title": "Login",
+        "sub_title": "Enter your email below to login to your account",
+        "email": "Email",
+        "email_placeholder": "m@example.com",
+        "password": "Password",
+        "forget_password": "Forgot your password?",
+        "google_login": "Login with Google",
+        "github_login": "Login with Github",
+        "sign_up": "Sign Up",
+        "sign_up_tips": "Don't have an account?"
+    },
     "home": "home",
     "my": "my",
     "myData": {

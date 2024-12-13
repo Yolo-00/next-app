@@ -7,6 +7,18 @@
         "dark": "黑暗",
         "system": "跟随系统"
     },
+    "login": {
+        "title": "登录",
+        "sub_title": "请输入您的邮箱以登录您的账户",
+        "email": "邮箱",
+        "email_placeholder": "m@example.com",
+        "password": "密码",
+        "forget_password": "忘记密码？",
+        "google_login": "使用 Google 登录",
+        "github_login": "使用 Github 登录",
+        "sign_up": "注册",
+        "sign_up_tips": "还没有账户？"
+    },
     "home": "首页",
     "my": "我的",
     "myPage": {
