@@ -17,7 +17,10 @@
         "google_login": "Login with Google",
         "github_login": "Login with Github",
         "sign_up": "Sign Up",
-        "sign_up_tips": "Don't have an account?"
+        "sign_up_tips": "Don't have an account?",
+        "email_err": "Please enter a valid email",
+        "password_err": "Please enter your password",
+        "or_tips":"Or continue with"
     },
     "home": "home",
     "my": "my",

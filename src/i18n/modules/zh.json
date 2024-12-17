@@ -17,7 +17,10 @@
         "google_login": "使用 Google 登录",
         "github_login": "使用 Github 登录",
         "sign_up": "注册",
-        "sign_up_tips": "还没有账户？"
+        "sign_up_tips": "还没有账户？",
+        "email_err": "请输入有效的电子邮件",
+        "password_err": "请输入密码",
+        "or_tips": "或者继续"
     },
     "home": "首页",
     "my": "我的",

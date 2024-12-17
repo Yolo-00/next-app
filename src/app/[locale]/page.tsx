@@ -42,6 +42,9 @@ export default function Home() {
             {t("my")}
           </Link>
         </Button>
+        <Button>
+          <Link href="/login">去登录</Link>
+        </Button>
         <div className="flex">
           切换语言：
           <Select defaultValue={locale} onValueChange={onSelectChange}>
