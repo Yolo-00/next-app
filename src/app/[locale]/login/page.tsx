@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -135,7 +136,7 @@ const Page = () => {
                           {t("password")}
                         </FormLabel>
                         <Link
-                          href="#"
+                          href="/"
                           className="ml-auto inline-block text-sm underline"
                         >
                           {t("forget_password")}
@@ -175,11 +176,27 @@ const Page = () => {
           {/* 注册 */}
           <div className="mt-4 text-center text-sm">
             {t("sign_up_tips")}{" "}
-            <Link href="#" className="underline">
+            <Link href="/" className="underline">
               {t("sign_up")}
             </Link>
           </div>
         </CardContent>
+        <CardFooter>
+          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4">
+            {t.rich("privacy_agreement", {
+              div1: (chunks) => (
+                <Link className="hover:text-primary" href="/">
+                  {chunks}
+                </Link>
+              ),
+              div2: (chunks) => (
+                <Link className="hover:text-primary" href="/">
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );

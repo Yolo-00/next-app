@@ -1,6 +1,29 @@
 {
+    // 指定你的多语言文件夹路径
     "i18n-ally.localesPaths": [
-        "src/i18n",
-        "public/locales"
-    ]
-}
+      "src/i18n/modules",          // 你的语言包文件路径
+      "public/locales"     // 其他语言文件夹路径
+    ],
+  
+    // 语言文件的默认格式（json, yaml, etc.）
+    "i18n-ally.enabledParsers": ["json", "yaml"],
+  
+    // 设定当前项目的默认语言
+    "i18n-ally.sourceLanguage": "en",
+  
+    // 设定当前翻译目标语言（用于快速切换）
+    "i18n-ally.displayLanguage": "zh",
+  
+    // 是否启用翻译快速预览
+    "i18n-ally.preferEditor": true,
+  
+    // 翻译内容的排序方式
+    "i18n-ally.sortKeys": true,
+  
+    // 允许在文件中直接替换语言占位符
+    "i18n-ally.keystyle": "nested",
+  
+    // 自定义多语言文件的检测模式（例如支持嵌套结构）
+    "i18n-ally.pathMatcher": "{locale}.{ext}"
+  }
+  
