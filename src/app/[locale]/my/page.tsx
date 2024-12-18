@@ -1,17 +1,10 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { usePathname } from "@/i18n/routing";
-import { useSearchParams } from "next/navigation";
 const Page = () => {
   const t = useTranslations("myPage");
   const [value, setValue] = useState("");
-  const pathname = usePathname();
-  const locale = useLocale();
-  const searchParams = useSearchParams();
-  console.log(pathname, locale, `/${locale}${pathname}`);
-  console.log(searchParams.get("next"));
   return (
     <div>
       <h1>{t("title")}</h1>

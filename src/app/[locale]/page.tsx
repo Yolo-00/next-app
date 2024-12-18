@@ -12,6 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import { DateRange } from "react-day-picker";
+import { addDays } from "date-fns";
 import dayjs from "dayjs";
 export default function Home() {
   const t = useTranslations();
@@ -19,6 +22,10 @@ export default function Home() {
   const { changeLanguage } = useLanguage();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: new Date(),
+    to: addDays(new Date(), 5),
+  });
   const onSelectChange = (e: any) => {
     changeLanguage(e);
   };
@@ -45,6 +52,7 @@ export default function Home() {
         <Button>
           <Link href="/login">去登录</Link>
         </Button>
+
         <div className="flex">
           切换语言：
           <Select defaultValue={locale} onValueChange={onSelectChange}>
@@ -57,6 +65,7 @@ export default function Home() {
             </SelectContent>
           </Select>
         </div>
+
         <div className="flex mt-5">
           切换主题：
           <Select defaultValue={theme} onValueChange={onSelectThemeChange}>
@@ -70,6 +79,14 @@ export default function Home() {
             </SelectContent>
           </Select>
         </div>
+
+        <Calendar
+          mode="range"
+          selected={date}
+          onSelect={setDate}
+          className="rounded-md border"
+          numberOfMonths={2}
+        />
       </div>
     </div>
   );
