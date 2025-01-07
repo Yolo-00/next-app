@@ -1,12 +1,11 @@
-import "./globals.css";
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
 
 export async function generateMetadata({
@@ -16,7 +15,6 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "layout" });
-
   return {
     title: {
       default: t("title"),

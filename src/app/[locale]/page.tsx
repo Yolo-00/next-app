@@ -16,6 +16,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import dayjs from "dayjs";
+
 export default function Home() {
   const t = useTranslations();
   const locale = useLocale();
