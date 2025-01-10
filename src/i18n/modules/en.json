@@ -1,6 +1,9 @@
 {
     "layout": {
-        "title": "My NextJS application"
+        "title": "My NextJS application",
+        "nav": {
+            "login": "login"
+        }
     },
     "theme": {
         "light": "light",

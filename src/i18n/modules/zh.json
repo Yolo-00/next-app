@@ -1,6 +1,9 @@
 {
     "layout": {
-        "title": "我的 Next.js 应用"
+        "title": "我的 Next.js 应用",
+        "nav": {
+            "login": "登录"
+        }
     },
     "theme": {
         "light": "明亮",
