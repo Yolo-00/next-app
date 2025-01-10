@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "@/hooks";
 import { Link } from "@/i18n/routing";
-import { Earth, Moon, Sun } from "lucide-react";
+import { CircleUserRound, Earth, Moon, Sun } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 
@@ -23,8 +24,16 @@ const Nav = () => {
   };
   return (
     <>
-      <div className="flex justify-between items-center bg-background text-foreground sticky h-16 px-5">
-        <div></div>
+      <div className="flex justify-between items-center bg-background text-foreground sticky top-0 h-16 px-5 border-b border-gray-200">
+        <div>
+          <Image
+            src="/images/logo.svg"
+            alt="logo"
+            width={40}
+            height={40}
+            priority
+          />
+        </div>
         <div className="flex items-center gap-5">
           {/* locale */}
           <DropdownMenu>
@@ -59,6 +68,13 @@ const Nav = () => {
             ) : (
               <Moon strokeWidth={1.5} />
             )}
+          </Button>
+
+          {/* user */}
+          <Button variant="ghost" className="w-8 h-8">
+            <Link href="/my">
+              <CircleUserRound size={32} strokeWidth={1.5} />
+            </Link>
           </Button>
 
           {/* login */}
