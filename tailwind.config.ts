@@ -55,6 +55,10 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
+      },
+      spacing: {
+        'screen-minus-nav': 'calc(100vh - var(--nav-height))',
+        "nav-height": "var(--nav-height)"
       }
     }
   },

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {
@@ -8,10 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "@/hooks";
+import { useTheme } from "next-themes";
 import { Link } from "@/i18n/routing";
 import { CircleUserRound, Earth, Moon, Sun } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 
 const Nav = () => {
   const t = useTranslations();
@@ -24,7 +25,7 @@ const Nav = () => {
   };
   return (
     <>
-      <div className="flex justify-between items-center bg-background text-foreground sticky top-0 h-16 px-5 border-b border-gray-200">
+      <div className="flex justify-between items-center bg-background text-foreground sticky top-0 h-nav-height px-5 border-b border-gray-200">
         <div>
           <Image
             src="/images/logo.svg"

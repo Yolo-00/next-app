@@ -97,7 +97,7 @@ const Page = () => {
     }
   }, [searchParams, router]);
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen-minus-nav">
       <Card className="w-[24rem]">
         <CardHeader>
           <CardTitle className="text-2xl">{t("title")}</CardTitle>
