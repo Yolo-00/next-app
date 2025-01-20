@@ -7,6 +7,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "next-themes";
+import CustomWagmiProvider from "@/components/CustomWagmiProvider";
+import type { LanguageType } from "@/i18n/interface/index";
 
 export async function generateMetadata({
   params,
@@ -32,10 +34,10 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: LanguageType }>;
 }>) {
   const { locale } = await params;
-  if (!locale || !routing.locales.includes(locale as "en" | "zh")) {
+  if (!locale || !routing.locales.includes(locale)) {
     notFound();
   }
   setRequestLocale(locale);
@@ -45,7 +47,9 @@ export default async function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="system">
           <NextIntlClientProvider messages={messages}>
-            {children}
+            <CustomWagmiProvider locale={locale}>
+              {children}
+            </CustomWagmiProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

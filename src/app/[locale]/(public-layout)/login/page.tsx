@@ -18,12 +18,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Wallet } from "lucide-react";
 // i18n
 import { Link, useRouter } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 // react next
 import { useCurrentPath } from "@/hooks";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -86,7 +88,7 @@ const Page = () => {
   const handleLogin = (values: z.infer<typeof formSchema>) => {
     console.log(values);
   };
-  useLayoutEffect(() => {
+  useEffect(() => {
     const code = searchParams.get("code");
     if (code) {
       // 处理 GitHub 重定向回来的 code
@@ -158,11 +160,12 @@ const Page = () => {
                   </span>
                 </div>
                 {/* 额外登录 */}
-                <Button variant="outline" className="w-full">
+                <Button type="button" variant="outline" className="w-full">
                   <GoogleIcon />
                   {t("google_login")}
                 </Button>
                 <Button
+                  type="button"
                   variant="outline"
                   className="w-full"
                   onClick={handleGithubLogin}
@@ -170,6 +173,44 @@ const Page = () => {
                   <GitHubIcon />
                   {t("github_login")}
                 </Button>
+                {/* 钱包 */}
+                <ConnectButton.Custom>
+                  {({
+                    account,
+                    chain,
+                    openAccountModal,
+                    openConnectModal,
+                    authenticationStatus,
+                    mounted,
+                  }) => {
+                    console.log(account);
+                    const ready = mounted && authenticationStatus !== "loading";
+                    const connected =
+                      ready &&
+                      account &&
+                      chain &&
+                      (!authenticationStatus ||
+                        authenticationStatus === "authenticated");
+                    return (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (!connected) {
+                            openConnectModal();
+                          } else {
+                            openAccountModal();
+                          }
+                        }}
+                      >
+                        <Wallet strokeWidth={2} />
+                        {t("wallet_login")}
+                      </Button>
+                    );
+                  }}
+                </ConnectButton.Custom>
               </div>
             </form>
           </Form>

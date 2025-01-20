@@ -19,12 +19,14 @@
         "forget_password": "Forgot your password?",
         "google_login": "Login with Google",
         "github_login": "Login with Github",
+        "wallet_login": "Login with Wallet",
         "sign_up": "Sign Up",
         "sign_up_tips": "Don't have an account?",
         "email_err": "Please enter a valid email",
         "password_err": "Please enter your password",
         "or_tips": "Or continue with",
-        "privacy_agreement": "By clicking continue, you agree to our <div1> Terms of Service </div1> and <div2> Privacy Policy </div2>."
+        "privacy_agreement": "By clicking continue, you agree to our <div1> Terms of Service </div1> and <div2> Privacy Policy </div2>.",
+        "common_wallets": "Common wallets"
     },
     "home": "home",
     "my": "my",
