@@ -13,10 +13,35 @@ import { useTheme } from "next-themes";
 import { Link } from "@/i18n/routing";
 import { CircleUserRound, Earth, Moon, Sun } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+
+function ThemeButton() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted)
+    return (
+      <div className="animate-pulse bg-gray-200 m-2 w-4 h-4 rounded-sm cursor-pointer"></div>
+    );
+  return (
+    <Button
+      variant="ghost"
+      className="w-8 h-8"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
+      {theme === "dark" ? (
+        <Sun strokeWidth={1.5} />
+      ) : (
+        <Moon strokeWidth={1.5} />
+      )}
+    </Button>
+  );
+}
 
 const Nav = () => {
   const t = useTranslations();
-  const { theme, setTheme } = useTheme();
   const locale = useLocale();
   const { changeLanguage } = useLanguage();
 
@@ -38,6 +63,9 @@ const Nav = () => {
           </Link>
         </div>
         <div className="flex items-center gap-5">
+          {/* theme */}
+          <ThemeButton />
+
           {/* locale */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -59,19 +87,6 @@ const Nav = () => {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          {/* theme */}
-          <Button
-            variant="ghost"
-            className="w-8 h-8"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {theme === "dark" ? (
-              <Sun strokeWidth={1.5} />
-            ) : (
-              <Moon strokeWidth={1.5} />
-            )}
-          </Button>
 
           {/* user */}
           <Button variant="ghost" className="w-8 h-8">
