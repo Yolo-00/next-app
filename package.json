@@ -20,6 +20,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.468.0",
     "next": "15.0.4",
     "next-intl": "^3.26.0",
@@ -35,6 +36,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

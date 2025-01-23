@@ -31,6 +31,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 // zod
 import { z } from "zod";
+// cookie
+import Cookies from "js-cookie";
+// wagmi
+import { useAccount } from "wagmi";
+
 const GoogleIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -66,6 +71,7 @@ const Page = () => {
   const currentPath = useCurrentPath();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { address } = useAccount();
 
   const formSchema = z.object({
     email: z.string().email({ message: t("email_err") }),
@@ -87,17 +93,28 @@ const Page = () => {
   };
   const handleLogin = (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    Cookies.set("token", "123456");
+    router.replace(`/`);
   };
   useEffect(() => {
     const code = searchParams.get("code");
     if (code) {
       // 处理 GitHub 重定向回来的 code
       console.log("GitHub 授权码:", code);
+      Cookies.set("token", "123456");
       // 在这里可以将 code 发送给后端进行 GitHub 登录验证
       // 验证成功后，可以获取用户信息并进行相应的操作
       router.replace(`/`);
     }
-  }, [searchParams, router]);
+
+    if (Cookies.get("token")) {
+      router.back();
+    }
+    if (address) {
+      Cookies.set("token", address);
+      router.back();
+    }
+  }, [searchParams, router, address]);
   return (
     <div className="flex justify-center items-center h-screen-minus-nav">
       <Card className="w-[24rem]">
@@ -183,7 +200,6 @@ const Page = () => {
                     authenticationStatus,
                     mounted,
                   }) => {
-                    console.log(account);
                     const ready = mounted && authenticationStatus !== "loading";
                     const connected =
                       ready &&

@@ -2,6 +2,8 @@
 import {
   connectorsForWallets,
   RainbowKitProvider,
+  darkTheme,
+  lightTheme,
   type Locale,
 } from "@rainbow-me/rainbowkit";
 import { createConfig, http, WagmiProvider } from "wagmi";
@@ -14,6 +16,7 @@ import {
 } from "@rainbow-me/rainbowkit/wallets";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 
 const CustomWagmiProvider = ({
   children,
@@ -22,6 +25,7 @@ const CustomWagmiProvider = ({
   children: React.ReactNode;
   locale: Locale;
 }>) => {
+  const { theme } = useTheme();
   const t = useTranslations();
   const queryClient = new QueryClient();
   const connectors = connectorsForWallets(
@@ -53,7 +57,12 @@ const CustomWagmiProvider = ({
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider locale={locale}>{children}</RainbowKitProvider>
+        <RainbowKitProvider
+          locale={locale}
+          theme={theme === "dark" ? darkTheme() : lightTheme()}
+        >
+          {children}
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

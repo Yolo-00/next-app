@@ -2,7 +2,9 @@
     "layout": {
         "title": "My NextJS application",
         "nav": {
-            "login": "login"
+            "login": "login",
+            "logout": "Log Out",
+            "my": "Personal Center"
         }
     },
     "theme": {

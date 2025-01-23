@@ -2,7 +2,9 @@
     "layout": {
         "title": "我的 Next.js 应用",
         "nav": {
-            "login": "登录"
+            "login": "登录",
+            "logout": "退出登录",
+            "my": "个人中心"
         }
     },
     "theme": {
