@@ -47,10 +47,11 @@ const Nav = () => {
   const t = useTranslations();
   const locale = useLocale();
   const { changeLanguage } = useLanguage();
-  const [token, setToken] = useState<string | undefined>(undefined);
   const router = useRouter();
   const pathname = usePathname();
   const { disconnect } = useDisconnect();
+
+  const [token, setToken] = useState<string | undefined>(undefined);
 
   const onSelectChange = (e: any) => {
     changeLanguage(e);
@@ -79,6 +80,8 @@ const Nav = () => {
             />
           </Link>
         </div>
+
+        {/* right */}
         <div className="flex items-center gap-5">
           {/* theme */}
           <ThemeButton />

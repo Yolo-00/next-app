@@ -4,7 +4,6 @@ import { Calendar } from "@/components/ui/calendar";
 import Nav from "@/components/nav";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
-import dayjs from "dayjs";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -13,8 +12,6 @@ export default function Home() {
     to: addDays(new Date(), 5),
   });
   useEffect(() => {
-    console.log(dayjs(new Date().toISOString()).format("YYYY-MM-DD HH:mm:ss"));
-    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
     setMounted(true);
   }, []);
   if (!mounted) {
