@@ -25,7 +25,7 @@ import { Link, useRouter } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 // react next
 import { useCurrentPath } from "@/hooks";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,13 +66,29 @@ const changeEncodeURI = (currentPath: string) => {
   );
 };
 
+const GitHubCode = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  useEffect(() => {
+    const code = searchParams.get("code");
+    if (code) {
+      // 处理 GitHub 重定向回来的 code
+      console.log("GitHub 授权码:", code);
+      Cookies.set("token", "123456");
+      // 在这里可以将 code 发送给后端进行 GitHub 登录验证
+      // 验证成功后，可以获取用户信息并进行相应的操作
+      router.replace(`/`);
+    }
+  }, [searchParams, router]);
+  return null;
+};
+
 const Page = () => {
   const t = useTranslations("login");
   const currentPath = useCurrentPath();
-  const searchParams = useSearchParams();
+
   const router = useRouter();
   const { address } = useAccount();
-
   const formSchema = z.object({
     email: z.string().email({ message: t("email_err") }),
     password: z.string().nonempty({ message: t("password_err") }),
@@ -97,165 +113,159 @@ const Page = () => {
     router.replace(`/`);
   };
   useEffect(() => {
-    const code = searchParams.get("code");
-    if (code) {
-      // 处理 GitHub 重定向回来的 code
-      console.log("GitHub 授权码:", code);
-      Cookies.set("token", "123456");
-      // 在这里可以将 code 发送给后端进行 GitHub 登录验证
-      // 验证成功后，可以获取用户信息并进行相应的操作
-      router.replace(`/`);
-    }
-
     if (Cookies.get("token")) {
-      router.back();
+      // router.back();
     }
     if (address) {
       Cookies.set("token", address);
       router.back();
     }
-  }, [searchParams, router, address]);
+  }, [router, address]);
   return (
-    <div className="flex justify-center items-center h-screen-minus-nav">
-      <Card className="w-[24rem]">
-        <CardHeader>
-          <CardTitle className="text-2xl">{t("title")}</CardTitle>
-          <CardDescription>{t("sub_title")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {/* 表单 */}
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleLogin)}>
-              <div className="grid gap-4">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground">
-                        {t("email")}
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder={t("email_placeholder")}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center">
+    <Suspense>
+      <div className="flex justify-center items-center h-screen-minus-nav">
+        <Card className="w-[24rem]">
+          <CardHeader>
+            <CardTitle className="text-2xl">{t("title")}</CardTitle>
+            <CardDescription>{t("sub_title")}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {/* 表单 */}
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleLogin)}>
+                <div className="grid gap-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
                         <FormLabel className="text-foreground">
-                          {t("password")}
+                          {t("email")}
                         </FormLabel>
-                        <Link
-                          href="/"
-                          className="ml-auto inline-block text-sm underline"
+                        <FormControl>
+                          <Input
+                            placeholder={t("email_placeholder")}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <div className="flex items-center">
+                          <FormLabel className="text-foreground">
+                            {t("password")}
+                          </FormLabel>
+                          <Link
+                            href="/"
+                            className="ml-auto inline-block text-sm underline"
+                          >
+                            {t("forget_password")}
+                          </Link>
+                        </div>
+                        <FormControl>
+                          <Input type="password" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" className="w-full">
+                    {t("title")}
+                  </Button>
+                  <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                    <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                      {t("or_tips")}
+                    </span>
+                  </div>
+                  {/* 额外登录 */}
+                  <Button type="button" variant="outline" className="w-full">
+                    <GoogleIcon />
+                    {t("google_login")}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full"
+                    onClick={handleGithubLogin}
+                  >
+                    <GitHubIcon />
+                    {t("github_login")}
+                  </Button>
+                  {/* 钱包 */}
+                  <ConnectButton.Custom>
+                    {({
+                      account,
+                      chain,
+                      openAccountModal,
+                      openConnectModal,
+                      authenticationStatus,
+                      mounted,
+                    }) => {
+                      const ready =
+                        mounted && authenticationStatus !== "loading";
+                      const connected =
+                        ready &&
+                        account &&
+                        chain &&
+                        (!authenticationStatus ||
+                          authenticationStatus === "authenticated");
+                      return (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="w-full"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (!connected) {
+                              openConnectModal();
+                            } else {
+                              openAccountModal();
+                            }
+                          }}
                         >
-                          {t("forget_password")}
-                        </Link>
-                      </div>
-                      <FormControl>
-                        <Input type="password" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" className="w-full">
-                  {t("title")}
-                </Button>
-                <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                  <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                    {t("or_tips")}
-                  </span>
+                          <Wallet strokeWidth={2} />
+                          {t("wallet_login")}
+                        </Button>
+                      );
+                    }}
+                  </ConnectButton.Custom>
                 </div>
-                {/* 额外登录 */}
-                <Button type="button" variant="outline" className="w-full">
-                  <GoogleIcon />
-                  {t("google_login")}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full"
-                  onClick={handleGithubLogin}
-                >
-                  <GitHubIcon />
-                  {t("github_login")}
-                </Button>
-                {/* 钱包 */}
-                <ConnectButton.Custom>
-                  {({
-                    account,
-                    chain,
-                    openAccountModal,
-                    openConnectModal,
-                    authenticationStatus,
-                    mounted,
-                  }) => {
-                    const ready = mounted && authenticationStatus !== "loading";
-                    const connected =
-                      ready &&
-                      account &&
-                      chain &&
-                      (!authenticationStatus ||
-                        authenticationStatus === "authenticated");
-                    return (
-                      <Button
-                        type="button"
-                        variant="outline"
-                        className="w-full"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (!connected) {
-                            openConnectModal();
-                          } else {
-                            openAccountModal();
-                          }
-                        }}
-                      >
-                        <Wallet strokeWidth={2} />
-                        {t("wallet_login")}
-                      </Button>
-                    );
-                  }}
-                </ConnectButton.Custom>
-              </div>
-            </form>
-          </Form>
-          {/* 注册 */}
-          <div className="mt-4 text-center text-sm">
-            {t("sign_up_tips")}{" "}
-            <Link href="/" className="underline">
-              {t("sign_up")}
-            </Link>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4">
-            {t.rich("privacy_agreement", {
-              div1: (chunks) => (
-                <Link className="hover:text-primary" href="/">
-                  {chunks}
-                </Link>
-              ),
-              div2: (chunks) => (
-                <Link className="hover:text-primary" href="/">
-                  {chunks}
-                </Link>
-              ),
-            })}
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+              </form>
+            </Form>
+            {/* 注册 */}
+            <div className="mt-4 text-center text-sm">
+              {t("sign_up_tips")}{" "}
+              <Link href="/" className="underline">
+                {t("sign_up")}
+              </Link>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4">
+              {t.rich("privacy_agreement", {
+                div1: (chunks) => (
+                  <Link className="hover:text-primary" href="/">
+                    {chunks}
+                  </Link>
+                ),
+                div2: (chunks) => (
+                  <Link className="hover:text-primary" href="/">
+                    {chunks}
+                  </Link>
+                ),
+              })}
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+      <GitHubCode />
+    </Suspense>
   );
 };
 
