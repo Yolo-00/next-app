@@ -9,6 +9,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import NavMenu from "./menu";
 import { useLanguage } from "@/hooks";
 import { useTheme } from "next-themes";
 import { Link, useRouter, usePathname } from "@/i18n/routing";
@@ -69,7 +71,7 @@ const Nav = () => {
   return (
     <>
       <div className="flex justify-between items-center bg-background text-foreground sticky top-0 h-nav-height px-5 border-b border-gray-200">
-        <div>
+        <div className="flex items-center">
           <Link href="/">
             <Image
               src="/images/logo.svg"
@@ -79,6 +81,8 @@ const Nav = () => {
               priority
             />
           </Link>
+          {/* nav menu */}
+          <NavMenu />
         </div>
 
         {/* right */}
@@ -112,14 +116,10 @@ const Nav = () => {
           {token && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Image
-                  src="/images/avatar.png"
-                  alt="logo"
-                  width={30}
-                  height={30}
-                  priority
-                  className="select-none rounded-full"
-                />
+                <Avatar className="w-7 h-7">
+                  <AvatarImage src="/images/avatar.png" />
+                  <AvatarFallback>Yolo</AvatarFallback>
+                </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="min-w-10">
                 <DropdownMenuItem className="flex justify-center">

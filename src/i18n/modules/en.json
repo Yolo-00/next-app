@@ -4,7 +4,8 @@
         "nav": {
             "login": "login",
             "logout": "Log Out",
-            "my": "Personal Center"
+            "my": "Personal Center",
+            "components_menu": "Components"
         }
     },
     "theme": {
