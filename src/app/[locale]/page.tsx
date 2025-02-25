@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Calendar } from "@/components/ui/calendar";
-import Nav from "@/components/nav";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
+
+import { Calendar } from "@/components/ui/calendar";
+import Nav from "@/components/nav";
+
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -20,7 +22,7 @@ export default function Home() {
   return (
     <div>
       <Nav />
-      <div className="p-5 h-screen-minus-nav">
+      <div className="p-5 content-height">
         <Calendar
           mode="range"
           selected={date}

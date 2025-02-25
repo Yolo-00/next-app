@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import TabsPage from "./TabsPage";
 const Page = () => {
   return (

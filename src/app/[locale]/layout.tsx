@@ -5,8 +5,9 @@ import {
 } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "next-themes";
+
+import { routing } from "@/i18n/routing";
 import CustomWagmiProvider from "@/components/CustomWagmiProvider";
 import type { LanguageType } from "@/i18n/interface/index";
 

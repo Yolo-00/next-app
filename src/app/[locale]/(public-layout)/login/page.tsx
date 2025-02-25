@@ -1,4 +1,18 @@
 "use client";
+import { Wallet } from "lucide-react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useTranslations } from "next-intl";
+import { useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import Cookies from "js-cookie";
+import { useAccount } from "wagmi";
+
+import { Link, useRouter } from "@/i18n/routing";
+import { useCurrentPath } from "@/hooks";
+
 // components
 import { Button } from "@/components/ui/button";
 import {
@@ -18,23 +32,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Wallet } from "lucide-react";
-// i18n
-import { Link, useRouter } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
-// react next
-import { useCurrentPath } from "@/hooks";
-import { useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-// zod
-import { z } from "zod";
-// cookie
-import Cookies from "js-cookie";
-// wagmi
-import { useAccount } from "wagmi";
 
 const GoogleIcon = () => {
   return (

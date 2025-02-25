@@ -7,7 +7,7 @@ export default function RootLayout({
   return (
     <>
       <Nav />
-      <div className="h-screen-minus-nav">{children}</div>
+      <div className="content-height">{children}</div>
     </>
   );
 }

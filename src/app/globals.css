@@ -72,4 +72,8 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  .content-height {
+    @apply h-auto box-border overflow-auto
+  }
 }
