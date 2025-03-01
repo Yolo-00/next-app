@@ -11,7 +11,7 @@ export default function Footer() {
     <div className="w-full min-h-20 px-5 bg-background text-foreground flex items-start">
       <div className="w-60">
         <div className="text-2xl font-bold mb-5">NEXT APP</div>
-        <Link className="underline" href="g20180630105@gmail.com">
+        <Link className="underline" href="mailto:g20180630105@gmail.com">
           g20180630105@gmail.com
         </Link>
         <div className="font-semibold my-5">{t("layout.footer.follow")}</div>
