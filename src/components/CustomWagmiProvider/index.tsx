@@ -1,4 +1,5 @@
 "use client";
+
 import {
   connectorsForWallets,
   RainbowKitProvider,
@@ -17,6 +18,7 @@ import {
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const CustomWagmiProvider = ({
   children,
@@ -54,6 +56,13 @@ const CustomWagmiProvider = ({
     multiInjectedProviderDiscovery: false,
     ssr: true,
   });
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
