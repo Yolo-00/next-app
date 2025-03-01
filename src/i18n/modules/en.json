@@ -6,6 +6,9 @@
             "logout": "Log Out",
             "my": "Personal Center",
             "components_menu": "Components"
+        },
+        "footer": {
+            "follow": "Follow me"
         }
     },
     "theme": {

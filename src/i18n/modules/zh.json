@@ -6,6 +6,9 @@
             "logout": "退出登录",
             "my": "个人中心",
             "components_menu": "组件"
+        },
+        "footer": {
+            "follow": "关注我"
         }
     },
     "theme": {
