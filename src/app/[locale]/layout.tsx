@@ -46,13 +46,13 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <NextIntlClientProvider messages={messages}>
-            <CustomWagmiProvider locale={locale}>
+        <NextIntlClientProvider messages={messages}>
+          <CustomWagmiProvider locale={locale}>
+            <ThemeProvider attribute="class" defaultTheme="system">
               {children}
-            </CustomWagmiProvider>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+            </ThemeProvider>
+          </CustomWagmiProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

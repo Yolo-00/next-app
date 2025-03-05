@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { useLocale, useTranslations } from "next-intl";
 import Cookies from "js-cookie";
-import { useDisconnect } from "wagmi";
+import { useDisconnect, useAccount } from "wagmi";
 import { Earth, Moon, Sun } from "lucide-react";
 import Image from "next/image";
 
@@ -33,6 +33,7 @@ export default function NavRight() {
   const router = useRouter();
   const pathname = usePathname();
   const { disconnect } = useDisconnect();
+  const accountData = useAccount();
 
   const [mounted, setMounted] = useState(false);
   const [token, setToken] = useState<string | undefined>(undefined);
@@ -88,24 +89,10 @@ export default function NavRight() {
       {/* Wallet */}
       {token && (
         <ConnectButton.Custom>
-          {({
-            account,
-            chain,
-            openAccountModal,
-            openConnectModal,
-            authenticationStatus,
-            mounted,
-          }) => {
-            const ready = mounted && authenticationStatus !== "loading";
-            const connected =
-              ready &&
-              account &&
-              chain &&
-              (!authenticationStatus ||
-                authenticationStatus === "authenticated");
+          {({ chain, openAccountModal, openConnectModal }) => {
             return (
               <>
-                {connected && chain.iconUrl && (
+                {accountData.status === "connected" && chain?.iconUrl && (
                   <Image
                     className="cursor-pointer"
                     src={chain.iconUrl}
@@ -116,7 +103,7 @@ export default function NavRight() {
                     onClick={() => openAccountModal()}
                   />
                 )}
-                {!connected && (
+                {accountData.status !== "connected" && (
                   <Button
                     variant="ghost"
                     className="w-8 h-8 [&_svg]:size-5"
