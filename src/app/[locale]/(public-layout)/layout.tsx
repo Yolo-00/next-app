@@ -7,7 +7,7 @@ export default function RootLayout({
   return (
     <>
       <Nav />
-      <div className="content-height">{children}</div>
+      <div className="content-box">{children}</div>
     </>
   );
 }
