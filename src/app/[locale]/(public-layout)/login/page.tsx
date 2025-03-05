@@ -1,6 +1,4 @@
 "use client";
-import { Wallet } from "lucide-react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useTranslations } from "next-intl";
 import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -8,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Cookies from "js-cookie";
-import { useAccount } from "wagmi";
 
 import { Link, useRouter } from "@/i18n/routing";
 import { useCurrentPath } from "@/hooks";
@@ -85,7 +82,6 @@ const Page = () => {
   const currentPath = useCurrentPath();
 
   const router = useRouter();
-  const { address } = useAccount();
   const formSchema = z.object({
     email: z.string().email({ message: t("email_err") }),
     password: z.string().nonempty({ message: t("password_err") }),
@@ -111,13 +107,9 @@ const Page = () => {
   };
   useEffect(() => {
     if (Cookies.get("token")) {
-      // router.back();
-    }
-    if (address) {
-      Cookies.set("token", address);
       router.back();
     }
-  }, [router, address]);
+  }, [router]);
   return (
     <Suspense>
       <div className="flex justify-center items-center h-screen-minus-nav">
@@ -172,7 +164,7 @@ const Page = () => {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full">
+                  <Button type="submit" variant="outline" className="w-full">
                     {t("title")}
                   </Button>
                   <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
@@ -194,44 +186,6 @@ const Page = () => {
                     <GitHubIcon />
                     {t("github_login")}
                   </Button>
-                  {/* 钱包 */}
-                  <ConnectButton.Custom>
-                    {({
-                      account,
-                      chain,
-                      openAccountModal,
-                      openConnectModal,
-                      authenticationStatus,
-                      mounted,
-                    }) => {
-                      const ready =
-                        mounted && authenticationStatus !== "loading";
-                      const connected =
-                        ready &&
-                        account &&
-                        chain &&
-                        (!authenticationStatus ||
-                          authenticationStatus === "authenticated");
-                      return (
-                        <Button
-                          type="button"
-                          variant="outline"
-                          className="w-full"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (!connected) {
-                              openConnectModal();
-                            } else {
-                              openAccountModal();
-                            }
-                          }}
-                        >
-                          <Wallet strokeWidth={2} />
-                          {t("wallet_login")}
-                        </Button>
-                      );
-                    }}
-                  </ConnectButton.Custom>
                 </div>
               </form>
             </Form>

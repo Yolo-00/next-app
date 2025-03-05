@@ -1,11 +1,14 @@
 "use client";
 
+import { Wallet } from "lucide-react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { useLocale, useTranslations } from "next-intl";
 import Cookies from "js-cookie";
 import { useDisconnect } from "wagmi";
 import { Earth, Moon, Sun } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -81,6 +84,52 @@ export default function NavRight() {
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {/* Wallet */}
+      {token && (
+        <ConnectButton.Custom>
+          {({
+            account,
+            chain,
+            openAccountModal,
+            openConnectModal,
+            authenticationStatus,
+            mounted,
+          }) => {
+            const ready = mounted && authenticationStatus !== "loading";
+            const connected =
+              ready &&
+              account &&
+              chain &&
+              (!authenticationStatus ||
+                authenticationStatus === "authenticated");
+            return (
+              <>
+                {connected && chain.iconUrl && (
+                  <Image
+                    className="cursor-pointer"
+                    src={chain.iconUrl}
+                    alt="logo"
+                    width={20}
+                    height={20}
+                    priority
+                    onClick={() => openAccountModal()}
+                  />
+                )}
+                {!connected && (
+                  <Button
+                    variant="ghost"
+                    className="w-8 h-8 [&_svg]:size-5"
+                    onClick={() => openConnectModal()}
+                  >
+                    <Wallet strokeWidth={1.5} />
+                  </Button>
+                )}
+              </>
+            );
+          }}
+        </ConnectButton.Custom>
+      )}
 
       {/* login */}
       {token && (
