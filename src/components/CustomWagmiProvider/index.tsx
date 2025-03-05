@@ -30,35 +30,40 @@ const CustomWagmiProvider = ({
 }>) => {
   const { theme } = useTheme();
   const t = useTranslations();
-  const connectors = connectorsForWallets(
-    [
-      {
-        groupName: t("login.common_wallets"),
-        wallets: [
-          metaMaskWallet,
-          walletConnectWallet,
-          okxWallet,
-          binanceWallet,
-        ],
-      },
-    ],
-    { appName: "RainbowKit App", projectId: "YOUR_PROJECT_ID" }
+  const [connectors] = useState(
+    connectorsForWallets(
+      [
+        {
+          groupName: t("login.common_wallets"),
+          wallets: [
+            metaMaskWallet,
+            walletConnectWallet,
+            okxWallet,
+            binanceWallet,
+          ],
+        },
+      ],
+      { appName: "RainbowKit App", projectId: "YOUR_PROJECT_ID" }
+    )
   );
-  const config = createConfig({
-    connectors: [...connectors],
-    storage: createStorage({
-      storage: typeof window !== "undefined" ? window.localStorage : undefined,
-    }),
-    chains: [mainnet, base, sepolia, lineaSepolia],
-    transports: {
-      [mainnet.id]: http(),
-      [base.id]: http(),
-      [sepolia.id]: http(),
-      [lineaSepolia.id]: http(),
-    },
-    multiInjectedProviderDiscovery: false,
-    ssr: true,
-  });
+  const [config] = useState(
+    createConfig({
+      connectors: [...connectors],
+      storage: createStorage({
+        storage:
+          typeof window !== "undefined" ? window.localStorage : undefined,
+      }),
+      chains: [mainnet, base, sepolia, lineaSepolia],
+      transports: {
+        [mainnet.id]: http(),
+        [base.id]: http(),
+        [sepolia.id]: http(),
+        [lineaSepolia.id]: http(),
+      },
+      multiInjectedProviderDiscovery: false,
+      ssr: true,
+    })
+  );
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
