@@ -122,7 +122,7 @@ export default function NavRight() {
       {token && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Avatar className="w-7 h-7">
+            <Avatar className="w-7 h-7 cursor-pointer">
               <AvatarImage src="/images/avatar.png" />
               <AvatarFallback>Yolo</AvatarFallback>
             </Avatar>

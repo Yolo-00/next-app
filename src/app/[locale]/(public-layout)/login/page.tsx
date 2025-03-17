@@ -89,8 +89,8 @@ const Page = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "m@example.com",
+      password: "123456",
     },
   });
 
