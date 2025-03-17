@@ -5,12 +5,8 @@ export default function Home() {
   return (
     <div>
       <Nav />
-      <div className="p-5 content-box">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <div key={i} className="mb-5">
-            {i}
-          </div>
-        ))}
+      <div className="w-4/5 mx-auto content-box">
+        <div className="h-96">home</div>
       </div>
       <Footer />
     </div>

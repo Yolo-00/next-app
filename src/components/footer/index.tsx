@@ -8,7 +8,7 @@ export default function Footer() {
   const t = useTranslations();
 
   return (
-    <div className="w-full min-h-20 px-5 bg-background text-foreground flex items-start">
+    <div className="w-4/5 mx-auto min-h-20 bg-background text-foreground flex items-start">
       <div className="w-60">
         <div className="text-2xl font-bold mb-5">NEXT APP</div>
         <Link className="underline" href="mailto:g20180630105@gmail.com">
