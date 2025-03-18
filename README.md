@@ -68,12 +68,4 @@ pnpm build
 
 ## `Star`
 
-非常感谢留下星星的好心人，感谢您的支持 ❤️
-
 [![Stargazers repo roster for Yolo-00/next-app](https://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?user=Yolo-00&repo=next-app)](https://github.com/Yolo-00/next-app/stargazers)
-
-## `Fork`
-
-瞧，那些 `小哥哥` 、`小姐姐` 认真 `学习` 的样子真滴是 `哎呦不错哦` ❤️
-
-[![Forkers repo roster for Yolo-00/next-app](https://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?user=Yolo-00&repo=next-app)](https://github.com/Yolo-00/next-app/network/members)

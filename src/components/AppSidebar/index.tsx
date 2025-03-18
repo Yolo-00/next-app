@@ -1,4 +1,6 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+"use client";
+import { Home, Settings, CalendarDays } from "lucide-react";
+import { usePathname, Link } from "@/i18n/routing";
 
 import {
   Sidebar,
@@ -14,23 +16,13 @@ import {
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/components",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
     title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    url: "/components/calendar",
+    icon: CalendarDays,
   },
   {
     title: "Settings",
@@ -40,6 +32,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
   return (
     <Sidebar className="static h-screen-minus-nav">
       <SidebarContent>
@@ -48,11 +41,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
