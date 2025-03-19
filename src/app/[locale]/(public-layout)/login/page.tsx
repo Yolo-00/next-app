@@ -50,7 +50,8 @@ const GitHubIcon = () => {
     </svg>
   );
 };
-const clientId = "Ov23liyRpMRmQeOGgqel"; // GitHub OAuth Client ID
+// GitHub OAuth Client ID
+const clientId = process.env.NEXT_PUBLIC_GITHUB_ID;
 const changeEncodeURI = (currentPath: string) => {
   // 重定向的回调URL
   return encodeURIComponent(
@@ -100,9 +101,20 @@ const Page = () => {
     )}&scope=user`;
     window.location.href = githubAuthUrl; // 重定向到 GitHub 的授权页面
   };
-  const handleLogin = (values: z.infer<typeof formSchema>) => {
+  const handleLogin = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
-    Cookies.set("token", "123456");
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }
+    );
+    const res = await data.json();
+    Cookies.set("token", res.data.token);
     router.replace(`/`);
   };
   useEffect(() => {
@@ -164,7 +176,7 @@ const Page = () => {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" variant="outline" className="w-full">
+                  <Button type="submit" className="w-full">
                     {t("title")}
                   </Button>
                   <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
@@ -189,6 +201,7 @@ const Page = () => {
                 </div>
               </form>
             </Form>
+
             {/* 注册 */}
             <div className="mt-4 text-center text-sm">
               {t("sign_up_tips")}{" "}
@@ -197,6 +210,7 @@ const Page = () => {
               </Link>
             </div>
           </CardContent>
+
           <CardFooter>
             <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4">
               {t.rich("privacy_agreement", {
@@ -215,6 +229,7 @@ const Page = () => {
           </CardFooter>
         </Card>
       </div>
+
       <GitHubCode />
     </Suspense>
   );
