@@ -8,7 +8,7 @@ import {
   type Locale,
 } from "@rainbow-me/rainbowkit";
 import { createConfig, http, WagmiProvider, createStorage } from "wagmi";
-import { mainnet, base, sepolia, lineaSepolia } from "wagmi/chains";
+import { mainnet, base, sepolia, lineaSepolia, bsc } from "wagmi/chains";
 import {
   binanceWallet,
   metaMaskWallet,
@@ -43,7 +43,10 @@ const CustomWagmiProvider = ({
           ],
         },
       ],
-      { appName: "RainbowKit App", projectId: "YOUR_PROJECT_ID" }
+      {
+        appName: "RainbowKit App",
+        projectId: "d1f6f05b749ec6d832c8951abeca3038",
+      }
     )
   );
   const [config] = useState(
@@ -53,12 +56,13 @@ const CustomWagmiProvider = ({
         storage:
           typeof window !== "undefined" ? window.localStorage : undefined,
       }),
-      chains: [mainnet, base, sepolia, lineaSepolia],
+      chains: [mainnet, base, bsc, sepolia, lineaSepolia],
       transports: {
         [mainnet.id]: http(),
         [base.id]: http(),
         [sepolia.id]: http(),
         [lineaSepolia.id]: http(),
+        [bsc.id]: http("https://bsc-dataseed.binance.org"),
       },
       multiInjectedProviderDiscovery: false,
       ssr: true,
