@@ -22,8 +22,9 @@ function NavLink({
 const NavMenu = () => {
   const t = useTranslations();
   return (
-    <div className="ml-10">
+    <div className="ml-10 flex items-center gap-6">
       <NavLink href="/components">{t("layout.nav.components_menu")}</NavLink>
+      <NavLink href="/web3">{t("layout.nav.web3_menu")}</NavLink>
     </div>
   );
 };

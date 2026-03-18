@@ -5,7 +5,8 @@
             "login": "login",
             "logout": "Log Out",
             "my": "Personal Center",
-            "components_menu": "Components"
+            "components_menu": "Components",
+            "web3_menu": "Web3"
         },
         "footer": {
             "follow": "Follow me"
@@ -38,5 +39,139 @@
     "my": "my",
     "myPage": {
         "title": "hello my page"
+    },
+    "web3": {
+        "title": "Web3 Playground",
+        "subtitle": "Hands-on examples for wallet, on-chain read/write, signatures, and debugging.",
+        "demo": "Demo",
+        "explanation": "Explanation",
+        "pseudocode": "Pseudo Code",
+        "open_module": "Open Module",
+        "coming_soon": "Detailed interactive demo for this module is queued in next phases.",
+        "module_nav_title": "Web3 Modules",
+        "overview": "Overview",
+        "module_explain_1": "This module demonstrates the core path for \"{title}\".",
+        "module_explain_2": "Each page is designed as a reusable reference with minimal coupling.",
+        "common": {
+            "yes": "Yes",
+            "no": "No",
+            "loading": "Loading...",
+            "signing": "Signing..."
+        },
+        "actions": {
+            "connect": "Connect",
+            "disconnect": "Disconnect",
+            "refresh": "Refresh",
+            "refresh_nonce": "Refresh Nonce",
+            "sign_message": "Sign Message",
+            "sign_and_verify": "Sign + Verify"
+        },
+        "demo_labels": {
+            "status": "Status",
+            "connected": "Connected",
+            "address": "Address",
+            "chain_id": "Chain ID",
+            "current_chain_id": "Current Chain ID",
+            "connector": "Connector",
+            "balance": "Balance",
+            "nonce": "Nonce",
+            "error": "Error"
+        },
+        "messages": {
+            "rainbow_compare_note": "This page demonstrates RainbowKit connect flow for side-by-side comparison with the wagmi-only module.",
+            "switch_wallet_hint": "Switch account/network in wallet, logs will update here.",
+            "no_logs": "No logs yet.",
+            "default_sign_message": "Web3 demo sign-in message"
+        },
+        "modules": {
+            "wallet-connect": {
+                "title": "Wallet Connect",
+                "summary": "Connect/disconnect wallet using project default RainbowKit flow."
+            },
+            "wallet-connect-wagmi-only": {
+                "title": "Wallet Connect (Wagmi Only)",
+                "summary": "Connect wallets with wagmi hooks directly, without RainbowKit UI components."
+            },
+            "wallet-account": {
+                "title": "Wallet Account",
+                "summary": "Read account metadata: address, connector, chain id, and status."
+            },
+            "watch-account-network": {
+                "title": "Watch Account & Network",
+                "summary": "Observe account/network changes and append logs for debugging."
+            },
+            "network-switch": {
+                "title": "Network Switch",
+                "summary": "Switch chain and validate if the target chain is supported."
+            },
+            "native-balance": {
+                "title": "Native Balance",
+                "summary": "Read native coin balance for connected account."
+            },
+            "erc20-metadata": {
+                "title": "ERC20 Metadata",
+                "summary": "Read ERC20 name/symbol/decimals from contract."
+            },
+            "erc20-balance": {
+                "title": "ERC20 Balance",
+                "summary": "Read ERC20 balance for owner address."
+            },
+            "erc20-allowance": {
+                "title": "ERC20 Allowance",
+                "summary": "Read allowance(owner, spender) for approval workflows."
+            },
+            "contract-read": {
+                "title": "Contract Read",
+                "summary": "General readContract pattern for custom contract methods."
+            },
+            "contract-events": {
+                "title": "Contract Events",
+                "summary": "Watch events and query historical logs by block range."
+            },
+            "multicall": {
+                "title": "Multicall",
+                "summary": "Batch read multiple contracts/functions in a single request."
+            },
+            "native-transfer": {
+                "title": "Native Transfer",
+                "summary": "Send native token transaction and show hash/receipt lifecycle."
+            },
+            "erc20-approve": {
+                "title": "ERC20 Approve",
+                "summary": "Approve spender amount for token spending."
+            },
+            "erc20-transfer": {
+                "title": "ERC20 Transfer",
+                "summary": "Transfer ERC20 token using writeContract(transfer)."
+            },
+            "tx-status": {
+                "title": "Transaction Status",
+                "summary": "Track tx lifecycle: pending, confirmed, failed, replacement."
+            },
+            "gas-estimate": {
+                "title": "Gas Estimate",
+                "summary": "Compare EIP-1559 and legacy gas estimation strategies."
+            },
+            "sign-message": {
+                "title": "Sign Message",
+                "summary": "Sign plain message or SIWE-style payload from connected wallet."
+            },
+            "verify-signature": {
+                "title": "Verify Signature",
+                "summary": "Backend verification with nonce replay protection and context checks."
+            },
+            "error-handling": {
+                "title": "Error Handling",
+                "summary": "Map wallet/RPC/contract failures into stable UI error codes and tips."
+            },
+            "retry-pattern": {
+                "title": "Retry Pattern",
+                "summary": "Prevent duplicate submits and provide safe retry UX."
+            },
+            "dev-checklist": {
+                "title": "Dev Checklist",
+                "summary": "Checklist for RPC, faucet, ABI, addresses, and test accounts."
+            }
+        }
     }
 }

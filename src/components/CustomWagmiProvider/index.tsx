@@ -21,6 +21,10 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
+const walletConnectProjectId =
+  process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ||
+  "d1f6f05b749ec6d832c8951abeca3038";
+
 const CustomWagmiProvider = ({
   children,
   locale,
@@ -45,7 +49,7 @@ const CustomWagmiProvider = ({
       ],
       {
         appName: "RainbowKit App",
-        projectId: "d1f6f05b749ec6d832c8951abeca3038",
+        projectId: walletConnectProjectId,
       }
     )
   );

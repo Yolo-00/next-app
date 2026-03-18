@@ -5,7 +5,8 @@
             "login": "登录",
             "logout": "退出登录",
             "my": "个人中心",
-            "components_menu": "组件"
+            "components_menu": "组件",
+            "web3_menu": "Web3"
         },
         "footer": {
             "follow": "关注我"
@@ -38,5 +39,139 @@
     "my": "我的",
     "myPage": {
         "title": "你好, 我的页面"
+    },
+    "web3": {
+        "title": "Web3 示例中心",
+        "subtitle": "覆盖钱包交互、链上读写、签名验签与调试排错的实战示例。",
+        "demo": "功能示例",
+        "explanation": "说明",
+        "pseudocode": "伪代码",
+        "open_module": "进入模块",
+        "coming_soon": "该模块的完整可交互示例将在后续阶段继续完善。",
+        "module_nav_title": "Web3 模块",
+        "overview": "总览",
+        "module_explain_1": "该模块演示了「{title}」的核心实现路径。",
+        "module_explain_2": "每个页面都按可复用参考模板设计，尽量降低耦合。",
+        "common": {
+            "yes": "是",
+            "no": "否",
+            "loading": "加载中...",
+            "signing": "签名中..."
+        },
+        "actions": {
+            "connect": "连接",
+            "disconnect": "断开连接",
+            "refresh": "刷新",
+            "refresh_nonce": "刷新 Nonce",
+            "sign_message": "签名消息",
+            "sign_and_verify": "签名并验签"
+        },
+        "demo_labels": {
+            "status": "状态",
+            "connected": "已连接",
+            "address": "地址",
+            "chain_id": "链 ID",
+            "current_chain_id": "当前链 ID",
+            "connector": "连接器",
+            "balance": "余额",
+            "nonce": "Nonce",
+            "error": "错误"
+        },
+        "messages": {
+            "rainbow_compare_note": "此页用于展示 RainbowKit 的连接流程，方便与你的 wagmi-only 页面做对照。",
+            "switch_wallet_hint": "在钱包中切换账户或网络后，这里的日志会实时更新。",
+            "no_logs": "暂无日志。",
+            "default_sign_message": "Web3 示例登录签名消息"
+        },
+        "modules": {
+            "wallet-connect": {
+                "title": "钱包连接（RainbowKit）",
+                "summary": "使用项目默认 RainbowKit 流程进行钱包连接与断开。"
+            },
+            "wallet-connect-wagmi-only": {
+                "title": "钱包连接（Wagmi Only）",
+                "summary": "不依赖 RainbowKit 组件，直接用 wagmi hooks 实现连接流程。"
+            },
+            "wallet-account": {
+                "title": "账户信息",
+                "summary": "读取地址、连接器、链 ID、连接状态等账户元数据。"
+            },
+            "watch-account-network": {
+                "title": "监听账户与网络",
+                "summary": "监听账户/网络变化并追加日志，用于调试。"
+            },
+            "network-switch": {
+                "title": "网络切换",
+                "summary": "切换链并校验目标链是否受支持。"
+            },
+            "native-balance": {
+                "title": "原生币余额",
+                "summary": "读取当前连接账户的原生币余额。"
+            },
+            "erc20-metadata": {
+                "title": "ERC20 元数据",
+                "summary": "读取 ERC20 的 name/symbol/decimals。"
+            },
+            "erc20-balance": {
+                "title": "ERC20 余额",
+                "summary": "读取指定 owner 地址的 ERC20 余额。"
+            },
+            "erc20-allowance": {
+                "title": "ERC20 授权额度",
+                "summary": "读取 allowance(owner, spender) 用于授权流程。"
+            },
+            "contract-read": {
+                "title": "合约读取",
+                "summary": "通用 readContract 调用模式，适配自定义方法。"
+            },
+            "contract-events": {
+                "title": "合约事件",
+                "summary": "监听实时事件并按区块范围查询历史日志。"
+            },
+            "multicall": {
+                "title": "批量读取（Multicall）",
+                "summary": "单次请求批量读取多个合约/方法。"
+            },
+            "native-transfer": {
+                "title": "原生币转账",
+                "summary": "发送原生币交易并展示哈希与回执生命周期。"
+            },
+            "erc20-approve": {
+                "title": "ERC20 授权",
+                "summary": "调用 approve 授权 spender 使用指定额度。"
+            },
+            "erc20-transfer": {
+                "title": "ERC20 转账",
+                "summary": "调用 transfer 执行 ERC20 转账。"
+            },
+            "tx-status": {
+                "title": "交易状态追踪",
+                "summary": "跟踪交易从 pending 到 confirmed/failed 的状态变化。"
+            },
+            "gas-estimate": {
+                "title": "Gas 估算",
+                "summary": "对比 EIP-1559 与 legacy 的 gas 估算策略。"
+            },
+            "sign-message": {
+                "title": "消息签名",
+                "summary": "对普通消息或 SIWE 风格消息进行签名。"
+            },
+            "verify-signature": {
+                "title": "验签",
+                "summary": "后端执行验签，包含 nonce 防重放与上下文校验。"
+            },
+            "error-handling": {
+                "title": "错误处理",
+                "summary": "将钱包/RPC/合约错误映射为稳定的业务错误码与提示。"
+            },
+            "retry-pattern": {
+                "title": "重试模式",
+                "summary": "避免重复提交并提供安全的重试体验。"
+            },
+            "dev-checklist": {
+                "title": "开发检查清单",
+                "summary": "覆盖 RPC、水龙头、ABI、地址与测试账户检查项。"
+            }
+        }
     }
 }
