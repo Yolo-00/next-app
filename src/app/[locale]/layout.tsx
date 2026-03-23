@@ -35,20 +35,21 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: LanguageType }>;
+  params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
-  if (!locale || !routing.locales.includes(locale)) {
+  if (!locale || !routing.locales.includes(locale as LanguageType)) {
     notFound();
   }
-  setRequestLocale(locale);
+  const currentLocale = locale as LanguageType;
+  setRequestLocale(currentLocale);
   const messages = await getMessages();
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={currentLocale} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system">
-            <CustomWagmiProvider locale={locale}>
+            <CustomWagmiProvider locale={currentLocale}>
               {children}
             </CustomWagmiProvider>
           </ThemeProvider>
