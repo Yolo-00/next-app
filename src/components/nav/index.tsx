@@ -6,7 +6,7 @@ import NavRight from "./right";
 
 const Nav = () => {
   return (
-    <div className="sticky top-0 z-50 bg-background text-foreground h-nav-height border-b border-dotted border-gray-200">
+    <div className="sticky top-0 z-50 bg-background text-foreground h-nav-height border-b border-dotted border-gray-200 dark:border-white">
       <div className="w-4/5 h-full mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/">

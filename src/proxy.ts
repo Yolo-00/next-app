@@ -4,8 +4,8 @@ import { NextRequest } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
-export function middleware(request: NextRequest) {
-    // 执行 next-intl 的中间件
+export function proxy(request: NextRequest) {
+    // Execute next-intl proxy handler
     return intlMiddleware(request);
 }
 
